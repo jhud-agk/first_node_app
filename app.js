@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const session = require('express-session');
+const passport = require('passport');
 const config = require('./config/database');
 
 
@@ -74,6 +75,14 @@ app.use(expressValidator({
     };
   }
 }));
+
+
+//passport config
+require('./config/passport')(passport);
+
+//passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 
