@@ -3,6 +3,7 @@ const router = express.Router();
 
 //bring in article model
 let Article = require('../models/article');
+let User = require('../models/user');
 
 
 
@@ -99,8 +100,11 @@ router.delete('/:id', (req,res)=>{
 // Get single article
 router.get('/:id', ( req,res) =>{
 	Article.findById(req.params.id, ( err, article)=>{
-		res.render('article', {
-			article:article
+		User.findById(article.author,(err,user)=>{
+			res.render('article', {
+				article:article,
+				author: user.name
+			});
 		});
 	});
 });
