@@ -17,7 +17,7 @@ router.get('/add', (req,res)=>{
 //add submit POST  route
 router.post('/add', (req,res)=>{
 	req.checkBody('title','Title is required').notEmpty();
-	req.checkBody('author','Author is required').notEmpty();
+	// req.checkBody('author','Author is required').notEmpty();
 	req.checkBody('body','body is required').notEmpty();
 
 	//get errors
@@ -32,7 +32,7 @@ router.post('/add', (req,res)=>{
 	else{
 		let article = new Article();
 		article.title = req.body.title;
-		article.author = req.body.author;
+		article.author = req.user._id;
 		article.body = req.body.body;
 
 		article.save((err)=>{
