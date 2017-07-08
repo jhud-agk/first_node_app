@@ -22,6 +22,8 @@
 }
 .navbar-inverse .navbar-nav  li a:hover{
 	color:#9e9e9e ;
+	font-weight: bolder;
+	animation: ease-in-out 2s;
 }
 h1, h2, h3, h4{
 	color: #526173; 
