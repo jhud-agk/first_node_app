@@ -51,7 +51,7 @@ router.post('/add', (req,res)=>{
 
 
 // load edit form
-router.get('/edit/:id', ( req,res) =>{
+router.get('/edit/:id', ensureAuthenticated, ( req,res) =>{
 	Article.findById(req.params.id, ( err, article)=>{
 		res.render('edit_article', {
 			title:'Edit article',
