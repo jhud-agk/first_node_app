@@ -53,6 +53,10 @@ router.post('/add', (req,res)=>{
 // load edit form
 router.get('/edit/:id', ensureAuthenticated, ( req,res) =>{
 	Article.findById(req.params.id, ( err, article)=>{
+		if(article.author != req.user._id){
+			req.flash('danger', 'Not Authorized');
+			res.redirect('/');
+		}
 		res.render('edit_article', {
 			title:'Edit article',
 			article:article
