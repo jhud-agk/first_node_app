@@ -9,7 +9,7 @@ let User = require('../models/user');
 
 
 // Add Route
-router.get('/add', (req,res)=>{
+router.get('/add', ensureAuthenticated, (req,res)=>{
 	res.render('add_articles', {
 		title:'Add Article'
 	});
@@ -104,10 +104,24 @@ router.get('/:id', ( req,res) =>{
 			res.render('article', {
 				article:article,
 				author: user.name
-			});
+		   	});
 		});
 	});
 });
+
+// access control
+
+function ensureAuthenticated( req, res,next){
+	if(req.isAuthenticated()){
+		return next();
+	}
+	else{
+		req.flash('danger','please login');
+		res.redirect('/users/login');
+	}
+};
+
+
 
 
 module.exports = router;
